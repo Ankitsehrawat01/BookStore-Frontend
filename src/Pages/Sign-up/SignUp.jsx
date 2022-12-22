@@ -1,6 +1,12 @@
 import { Box, Button, Paper, TextField } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@mui/styles';
+import { signUpApi } from '../../Services/userService';
+
+const fullnameRegex = /^[A-Z]{1}[a-z]{2,}$/;
+const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&-+=()])([a-zA-Z0-9]*).{8,}$/;
+const phoneRegex = /^[6-9]{1}[0-9]{9}$/;
 
 const useStyle = makeStyles({
     paperbox: {
@@ -65,9 +71,85 @@ const useStyle = makeStyles({
 function SignUp(props) {
     const classes2 = useStyle()
 
-    const openLoginpage=()=>{
+    const [signupobj, setsignupobj] = useState ({
+        fullName: "",
+        email_Id: "",
+        password: "",
+        mobile_Number: 0,
+    })
+    const [regexObj, setRegexobj] = useState({
+        fullnameborder: false,
+        fullnamehelper: "",
+        emailborder: false,
+        emailhelper: "",
+        passwordborder: false,
+        passwordhelper: "",
+        mobileborder: false,
+        mobilehelper: "",
+    })
+    const enterFulltName = (event) => {
+        console.log(event.target.value)
+        setsignupobj((prevState) => ({ ...prevState, fullName: event.target.value }))
+    }
+    const enterEmail = (event) => {
+        console.log(event.target.value)
+        setsignupobj((prevState) => ({ ...prevState, email_Id: event.target.value }))
+    }
+    const enterPassword = (event) => {
+        console.log(event.target.value)
+        setsignupobj((prevState) => ({ ...prevState, password: event.target.value }))
+    }
+    const enterMobile = (event) => {
+        console.log(event.target.value)
+        setsignupobj((prevState) => ({ ...prevState, mobile_Number: Number(event.target.value) }))
+    }
+
+    const accountCreated = () => {
+        console.log(signupobj)
+        let checkFullName = fullnameRegex.test(signupobj.fullName)
+        let checkEmail = emailRegex.test(signupobj.email_Id)
+        let checkPassword = passwordRegex.test(signupobj.password)
+        let checkMobile = phoneRegex.test(signupobj.mobile_Number)
+
+        if (checkFullName === true) {
+            setRegexobj((prevState) => ({ ...prevState, fullnameborder: false, fullnamehelper: "" }))
+        }
+        else if (checkFullName === false) {
+            setRegexobj((prevState) => ({ ...prevState, fullnameborder: true, fullnamehelper: "Enter your correct Name" }))
+        }
+
+        if (checkEmail === true) {
+            setRegexobj((prevState) => ({ ...prevState, emailborder: false, emailhelper: "" }))
+        }
+        else if (checkEmail === false) {
+            setRegexobj((prevState) => ({ ...prevState, emailborder: true, emailhelper: "Enter your correct Mail" }))
+        }
+
+        if (checkPassword === true) {
+            setRegexobj((prevState) => ({ ...prevState, passwordborder: false, passwordhelper: "" }))
+        }
+        else if (checkPassword === false) {
+            setRegexobj((prevState) => ({ ...prevState, passwordborder: true, passwordhelper: "Enter your correct Password" }))
+        }
+
+        if (checkMobile === true) {
+            setRegexobj((prevState) => ({ ...prevState, mobileborder: false, mobilehelper: "" }))
+        }
+        else if (checkMobile === false) {
+            setRegexobj((prevState) => ({ ...prevState, mobileborder: true, mobilehelper: "Enter your correct Mobile" }))
+        }
+
+        if (checkFullName === true && checkEmail === true && checkPassword === true && checkMobile === true) {
+            signUpApi (signupobj)
+                .then((response) => { console.log(response) })
+                .catch((error) => { console.log(error) })
+            console.log("Account Created")
+        }
+    }
+    const openLoginpage = () => {
         props.listenTosignup1()
     }
+
     return (
         <Box>
             <Paper className={classes2.paperbox} elevation={5}>
@@ -78,19 +160,19 @@ function SignUp(props) {
                     </Box>
                     <Box className={classes2.input}>
                         <Box><span className={classes2.Emailtxt}>Full Name</span>
-                            <TextField variant="outlined" size="small" fullWidth='true' />
+                            <TextField variant="outlined" size="small" onChange={enterFulltName} error={regexObj.fullnameborder} helperText={regexObj.fullnamehelper} fullWidth='true' />
                         </Box>
-                        <Box><span className={classes2.Emailtxt}>Email Id</span>
-                            <TextField variant="outlined" size="small" fullWidth='true' />
+                        <Box><span className={classes2.Emailtxt} >Email Id</span>
+                            <TextField variant="outlined" size="small" onChange={enterEmail} error={regexObj.emailborder} helperText={regexObj.emailhelper} fullWidth='true' />
                         </Box>
                         <Box><span className={classes2.Emailtxt}>Password</span>
-                            <TextField variant="outlined" size="small" fullWidth='true'/>
+                            <TextField variant="outlined" size="small" onChange={enterPassword} error={regexObj.passwordborder} helperText={regexObj.passwordhelper} fullWidth='true' />
                         </Box>
                         <Box><span className={classes2.Emailtxt}>Mobile Number</span>
-                            <TextField variant="outlined" size="small" fullWidth='true'/>
+                            <TextField variant="outlined" size="small" onChange={enterMobile} error={regexObj.mobileborder} helperText={regexObj.mobilehelper} fullWidth='true' />
                         </Box>
                         <Box>
-                            <Button className={classes2.loginbtn} variant="contained" fullWidth='true'>Signup</Button>
+                            <Button className={classes2.loginbtn} variant="contained" fullWidth='true' onClick={accountCreated} >Signup</Button>
                         </Box>
                     </Box>
 
