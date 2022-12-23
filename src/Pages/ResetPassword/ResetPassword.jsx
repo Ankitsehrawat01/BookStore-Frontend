@@ -131,7 +131,6 @@ function ResetPassword() {
             resetApi(resetobj)
                 .then((response) => {
                     console.log(response)
-                    localStorage.setItem("token", response.data.data)
                 })
                 .catch((error) => { console.log(error) })
             console.log("Reset Password successful")

@@ -82,8 +82,8 @@ function Lander() {
                 <Box className={classes.main2}>
                     <Box className={classes.imgtext}>
                         <Box className={classes.image}>
-                            <img className={classes.image2} src='https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3Ad34eec70-2b44-4238-b40a-481560193975&params=version%3A0&token=1671597464_da39a3ee_7683dbbb23241328c6a5f994178d22661f54d899&api_key=CometServer1' />
-                            <img className={classes.image1} src='https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3Afd1a0f72-85bb-467c-9057-6bfc4d749b25&params=version%3A0&token=1671597464_da39a3ee_7683dbbb23241328c6a5f994178d22661f54d899&api_key=CometServer1' />
+                            <img className={classes.image2} src='https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3Ad34eec70-2b44-4238-b40a-481560193975&params=version%3A0&token=1671849321_da39a3ee_9f528ec79031cd4db7759419c07e3676c7c3eef3&api_key=CometServer1' />
+                            <img className={classes.image1} src='https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3Afd1a0f72-85bb-467c-9057-6bfc4d749b25&params=version%3A0&token=1671849321_da39a3ee_9f528ec79031cd4db7759419c07e3676c7c3eef3&api_key=CometServer1' />
                         </Box>
                         <Box className={classes.maintext}>ONLINE BOOK SHOPPING</Box>
                     </Box>

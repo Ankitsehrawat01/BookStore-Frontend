@@ -20,6 +20,6 @@ export const forgetApi =(email) => {
 }
 
 export const resetApi =(newpassObj) => {
-    let response = axios.post(`https://localhost:44379/api/User/Reset?newpassword=${newpassObj}&confirmpassword=${newpassObj}`,null, headerConfig)
+    let response = axios.post(`https://localhost:44379/api/User/Reset?newpassword=${newpassObj.newpassword}&confirmpassword=${newpassObj.confirmpassword}`,null, headerConfig)
     return response
 }

@@ -123,8 +123,11 @@ function Login(props) {
         setsigininobj((prevState) => ({ ...prevState, email_Id: event.target.value }))
     }
     const takePassword = (event) => {
+        console.log(event.target.value)
         setsigininobj((prevState) => ({ ...prevState, password: event.target.value }))
     }
+
+    const navigate = useNavigate ()
 
     const loginSuccessful = () => {
         console.log(signinobj)
@@ -148,17 +151,18 @@ function Login(props) {
         //API Call
         if (checkemail === true && checkpassword === true) {
             loginApi(signinobj)
-                .then((response) => { console.log(response) })
+                .then((response) => { console.log(response);
+                    navigate('/dashboard')
+                })
                 .catch((error) => { console.log(error) })
             console.log("login successful")
+            
         }
     }
 
     const openSignup = () => {
         props.listenTologin1()
     }
-
-    const navigate = useNavigate ()
     const Forget=()=> {
         navigate('/forgetpassword')
     }
