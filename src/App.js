@@ -1,6 +1,8 @@
 import './App.css';
 import Book from './Components/Book/Book';
+import BookSummary from './Components/BookSummary/BookSummary';
 import Header from './Components/Header/Header';
+import WishList from './Components/WishList/WishList';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import ForgetPassword from './Pages/ForgetPassword/ForgetPassword';
 import Lander from './Pages/Lander/Lander';
@@ -19,8 +21,10 @@ function App() {
      {/* <ResetPassword /> */}
      {/* < Header />  */}
      <Router1 />
-     {/* <Dashboard / >
-     <Book /> */}
+     {/* <Dashboard / > */}
+     {/* <Book /> */}
+     {/* <BookSummary /> */}
+     {/* <WishList /> */}
     </div>
   );
 }

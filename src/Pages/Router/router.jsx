@@ -1,6 +1,7 @@
 
 import React from 'react'
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import BookSummary from '../../Components/BookSummary/BookSummary'
 import Dashboard from '../Dashboard/Dashboard'
 import ForgetPassword from '../ForgetPassword/ForgetPassword'
 import Lander from '../Lander/Lander'
@@ -16,6 +17,7 @@ function Router1() {
                     <Route path='/forgetpassword' element={<ForgetPassword />} />
                     <Route path='/resetpassword' element={<ResetPassword />} />
                     <Route path ='/dashboard' element={<Dashboard />} />
+                    <Route path='/booksummary' element={<BookSummary />} />
                 </Routes>
             </Router>
         </div>

@@ -53,7 +53,7 @@ const useStyle = makeStyles({
         rowGap: '15px',
         top: '20px'
     },
-    Emailtxt: {
+    Emailtxt1: {
         display: 'flex',
         textAlign: 'left !important',
         fontSize: '10px',
@@ -159,17 +159,17 @@ function SignUp(props) {
                         <Button className={classes2.loginbutton}>SIGNUP</Button>
                     </Box>
                     <Box className={classes2.input}>
-                        <Box><span className={classes2.Emailtxt}>Full Name</span>
-                            <TextField variant="outlined" size="small" onChange={enterFulltName} error={regexObj.fullnameborder} helperText={regexObj.fullnamehelper} fullWidth='true' />
+                        <Box><span className={classes2.Emailtxt1}>Full Name</span>
+                            <TextField variant="outlined" size="small" onChange={enterFulltName} error={regexObj.fullnameborder} helperText={regexObj.fullnamehelper} fullWidth='true' style={{height: '40px'}} />
                         </Box>
-                        <Box><span className={classes2.Emailtxt} >Email Id</span>
-                            <TextField variant="outlined" size="small" onChange={enterEmail} error={regexObj.emailborder} helperText={regexObj.emailhelper} fullWidth='true' />
+                        <Box><span className={classes2.Emailtxt1} >Email Id</span>
+                            <TextField variant="outlined" size="small" onChange={enterEmail} error={regexObj.emailborder} helperText={regexObj.emailhelper} fullWidth='true' style={{height: '40px'}} />
                         </Box>
-                        <Box><span className={classes2.Emailtxt}>Password</span>
-                            <TextField variant="outlined" size="small" onChange={enterPassword} error={regexObj.passwordborder} helperText={regexObj.passwordhelper} fullWidth='true' />
+                        <Box><span className={classes2.Emailtxt1}>Password</span>
+                            <TextField variant="outlined" size="small" onChange={enterPassword} error={regexObj.passwordborder} helperText={regexObj.passwordhelper} fullWidth='true' style={{height: '40px'}} />
                         </Box>
-                        <Box><span className={classes2.Emailtxt}>Mobile Number</span>
-                            <TextField variant="outlined" size="small" onChange={enterMobile} error={regexObj.mobileborder} helperText={regexObj.mobilehelper} fullWidth='true' />
+                        <Box><span className={classes2.Emailtxt1}>Mobile Number</span>
+                            <TextField variant="outlined" size="small" onChange={enterMobile} error={regexObj.mobileborder} helperText={regexObj.mobilehelper} fullWidth='true' style={{height: '40px'}} />
                         </Box>
                         <Box>
                             <Button className={classes2.loginbtn} variant="contained" fullWidth='true' onClick={accountCreated} >Signup</Button>

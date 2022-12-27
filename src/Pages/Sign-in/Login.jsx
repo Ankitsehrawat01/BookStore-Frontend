@@ -67,7 +67,7 @@ const useStyle = makeStyles({
         color: '#0A0102 !important',
         fontSize: '10px !important',
         position: "relative",
-        left: '110px',
+        left: '100px',
         textTransform: 'capitalize !important',
         opacity: '0.7'
     },
@@ -151,7 +151,8 @@ function Login(props) {
         //API Call
         if (checkemail === true && checkpassword === true) {
             loginApi(signinobj)
-                .then((response) => { console.log(response);
+                .then((response) => { console.log(response)
+                    localStorage.setItem("token", response.data.data)
                     navigate('/dashboard')
                 })
                 .catch((error) => { console.log(error) })
@@ -177,10 +178,10 @@ function Login(props) {
                     </Box>
                     <Box className={classes1.input} >
                         <Box><span className={classes1.Emailtxt}>Email Id</span>
-                            <TextField variant="outlined" size="small" onChange={takeEmail} error={regexObj.emailborder} helperText={regexObj.emailhelper} fullWidth='true' />
+                            <TextField variant="outlined" size="small" onChange={takeEmail} error={regexObj.emailborder} helperText={regexObj.emailhelper} fullWidth='true' style={{height: '40px'}}/>
                         </Box>
                         <Box><span className={classes1.Emailtxt}>Password</span>
-                            <TextField variant="outlined" size="small" onChange={takePassword} error={regexObj.passwordborder} helperText={regexObj.passwordhelper} fullWidth='true' />
+                            <TextField variant="outlined" size="small" onChange={takePassword} error={regexObj.passwordborder} helperText={regexObj.passwordhelper} fullWidth='true' style={{height: '40px'}} />
                             <Button className={classes1.forgettext} size="x-small" variant='text' onClick={Forget}>Forget Password?</Button>
                         </Box>
                         <Box>

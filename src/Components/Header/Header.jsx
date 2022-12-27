@@ -92,15 +92,15 @@ export default function Header() {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        // vertical: 'top',
-        // horizontal: 'right',
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
 
-        // vertical: 'top',
-        // horizontal: 'right',
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -174,7 +174,7 @@ export default function Header() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem> */}
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen} >
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -191,7 +191,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: '#A03037 !important' }} elevation={1}>
+      <AppBar position="static" sx={{ backgroundColor: '#A03037 !important'}} elevation={1}>
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -210,7 +210,7 @@ export default function Header() {
           >
             <Box style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: '27vw', height: '6vh', border: '0px solid white', position: 'relative', left: '30px' }}>
               <Box style={{ width: '30%', height: '50px', border: '0px solid white' }}>
-                <img style={{ marginTop: '10px', marginLeft: '140px' }} src='https://public-v2links.adobecc.com/d096df37-ca37-4026-553f-8cfa6bec09ec/component?params=component_id%3A34a6421f-a569-47b8-bc37-078211517464&params=version%3A0&token=1671805598_da39a3ee_29d04fb1309cab857b3fe5209b290fc38cb349c4&api_key=CometServer1' />
+                <img style={{ marginTop: '10px', marginLeft: '140px' }} src='./assets/component.png' />
               </Box>
               <Box style={{ display: 'flex', flexDirection: 'row', width: '30%', height: '30px', marginTop: '7px', marginLeft: '20px', border: '0px solid black' }}>
                 Bookstore
@@ -230,7 +230,7 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
+            <IconButton 
               // size="large"
               // edge="end"
               // aria-label="account of current user"

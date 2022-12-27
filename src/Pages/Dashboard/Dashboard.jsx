@@ -49,7 +49,7 @@ const useStyle = makeStyles({
 
 function Dashboard() {
 
-    const classes5 = useStyle()
+    const classes6 = useStyle()
 
     const [dataArray, setDataArray] = useState([])
 
@@ -66,12 +66,12 @@ function Dashboard() {
     return (
         <div>
             <Header />
-            <Box className={classes5.options}>
-            <Box className={classes5.bookthing}>
+            <Box className={classes6.options}>
+            <Box className={classes6.bookthing}>
                 <Box style={{ fontWeight: 600, fontSize: 20 }}>
                     Books
                 </Box>
-                <Box className={classes5.Itemthing} style={{ fontSize: 13, color: '#878787', }}>
+                <Box className={classes6.Itemthing} style={{ fontSize: 13, color: '#878787', }}>
                     (123 Items)
                 </Box>
             </Box>
@@ -88,7 +88,7 @@ function Dashboard() {
             </Box>
             </Box>
             <div>
-                <div className={classes5.listren}>
+                <div className={classes6.listren}>
                     {
                         dataArray.map((book) => (<Book book={book} />))
                     }

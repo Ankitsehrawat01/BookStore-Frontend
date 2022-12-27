@@ -1,8 +1,10 @@
 import { makeStyles } from '@mui/styles'
-import React from 'react'
+import React, { useState } from 'react'
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
+import { retriveById } from '../../Services/dataservice';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyle = makeStyles({
@@ -73,7 +75,7 @@ const useStyle = makeStyles({
         alignItems: 'center',
         border: '0px solid red',
         position: 'relative',
-        top:'5px'
+        top: '5px'
     },
     bookratings: {
         width: '60%',
@@ -97,10 +99,10 @@ const useStyle = makeStyles({
         height: '22%',
         display: 'flex',
         flexDirection: 'row',
-       justifyContent: 'space-between',
+        justifyContent: 'space-between',
         alignItems: 'center',
         display: 'flex',
-        position:'relative',
+        position: 'relative',
         border: '0px solid red',
         top: '5px'
     },
@@ -116,27 +118,41 @@ const useStyle = makeStyles({
 })
 
 function Book(props) {
-    const classes = useStyle()
+    const classes7 = useStyle()
+
+    const navigate = useNavigate ()
+
+    const opnBookDetails = () => {
+        console.log(props.book.bookId)
+        retriveById(props.book.bookId)
+            .then((response) => {
+                console.log(response)
+                navigate('/booksummary')
+            })
+            .catch((error) => { console.log(error) })
+        console.log(" Get book by Id successful")
+    }
+
     return (
         <div>
-            <Paper elevation={1} className={classes.main2}>
-                <Box className={classes.bookimage}>
-                    <Box className={classes.bookimage2}><img className={classes.bookimg} src={props.book.book_Image} /></Box>
+            <Paper onClick={opnBookDetails} elevation={1} className={classes7.main2}>
+                <Box className={classes7.bookimage}>
+                    <Box className={classes7.bookimage2}><img className={classes7.bookimg} src={props.book.book_Image} /></Box>
                 </Box>
-                <Box className={classes.bookdetail}>
-                    <Box className={classes.booktext}>
-                        <Box className={classes.booktitle}>{props.book.book_Name}</Box>
-                        <Box className={classes.bookauthor}>by {props.book.author_Name}</Box>
-                        <Box className={classes.bookdetail1}>
-                            <Box className={classes.bookratings}>
+                <Box className={classes7.bookdetail}>
+                    <Box className={classes7.booktext}>
+                        <Box className={classes7.booktitle}>{props.book.book_Name}</Box>
+                        <Box className={classes7.bookauthor}>by {props.book.author_Name}</Box>
+                        <Box className={classes7.bookdetail1}>
+                            <Box className={classes7.bookratings}>
                                 <Box sx={{ fontSize: '12px' }}>{props.book.rating}</Box>
                                 <StarIcon fontSize="12px" sx={{ color: 'white' }} />
                             </Box>
-                            <Box className={classes.mark}>({props.book.rating_Count})</Box>
+                            <Box className={classes7.mark}>({props.book.rating_Count})</Box>
                         </Box>
-                        <Box className={classes.bookprice}>
-                            <Box className={classes.bookdiscount}>Rs. {props.book.discount_Price}</Box>
-                            <Box className={classes.bookcost}>Rs. {props.book.price}</Box>
+                        <Box className={classes7.bookprice}>
+                            <Box className={classes7.bookdiscount}>Rs. {props.book.discount_Price}</Box>
+                            <Box className={classes7.bookcost}>Rs. {props.book.price}</Box>
                         </Box>
                     </Box>
                 </Box>
