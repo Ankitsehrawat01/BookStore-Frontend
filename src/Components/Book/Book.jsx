@@ -120,18 +120,26 @@ const useStyle = makeStyles({
 function Book(props) {
     const classes7 = useStyle()
 
-    const navigate = useNavigate ()
+    const navigate = useNavigate()
 
     const opnBookDetails = () => {
-        console.log(props.book.bookId)
-        retriveById(props.book.bookId)
-            .then((response) => {
-                console.log(response)
-                navigate('/booksummary')
-            })
-            .catch((error) => { console.log(error) })
-        console.log(" Get book by Id successful")
+        const bookId = props.book.bookId;
+        localStorage.setItem("bookId", JSON.stringify(bookId))
+        navigate('/booksummary')
     }
+
+
+    // const opnBookDetails = () => {
+    //     console.log(props.book.bookId)
+    //     retriveById(props.book.bookId)
+    //         .then((response) => {
+    //             console.log(response)
+    //             localStorage.setItem("bookId", response.data.response)
+    //             navigate('/booksummary')
+    //         })
+    //         .catch((error) => { console.log(error) })
+    //     console.log(" Get book by Id successful")
+    // }
 
     return (
         <div>

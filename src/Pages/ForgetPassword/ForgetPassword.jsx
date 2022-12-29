@@ -111,8 +111,9 @@ const useStyle = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        bottom: '50px',
+        bottom: '20px',
         backgroundColor: '#E4E4E4 !important',
+        height: '10vh'
     }
 })
 

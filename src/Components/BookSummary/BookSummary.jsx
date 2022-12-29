@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles } from '@mui/styles'
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -9,6 +9,9 @@ import { Divider } from '@mui/material';
 import Rating from '@mui/material/Rating';
 import InputBase from '@mui/material/InputBase';
 import Header from '../Header/Header';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { addWishlist, retriveById } from '../../Services/dataservice';
+import { useState } from 'react';
 
 
 const useStyle = makeStyles({
@@ -293,8 +296,37 @@ const useStyle = makeStyles({
 
 })
 
-function BookSummary(props) {
+function BookSummary() {
   const classes8 = useStyle()
+
+  const [bookDetail, setBookDetail] = useState([])
+
+  const bookId = JSON.parse(localStorage.getItem("bookId"));
+
+  // const navigate = useNavigate ()
+
+
+  // const wishListlistener =()=> {
+  //   console.log(props.book.bookId)
+  //   addWishlist (props.book.bookId)
+  //           .then((response) => {
+  //               console.log(response)
+  //               localStorage.setItem("bookId", response.data.data)
+  //               navigate('/wishlist')
+  //           })
+  //           .catch((error) => { console.log(error) })
+  //       console.log(" add to wishlist successful")
+  // }
+
+useEffect(() => {
+    retriveById (bookId)
+    .then((response) => {
+      console.log(response)
+      setBookDetail(response.data.response)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }, [])
 
   return (
     <div>
@@ -303,18 +335,18 @@ function BookSummary(props) {
         <Box className={classes8.headerbsummary}>
           <Box className={classes8.homebook}>
             <Box className={classes8.homebsummary}>Home /</Box>
-            <Box className={classes8.bookbsummary}> Book(01)</Box>
+            <Box className={classes8.bookbsummary}> Book({bookDetail.bookId})</Box>
           </Box>
         </Box>
         <Box className={classes8.container3}>
           <Box className={classes8.bookimages}>
-            <Box className={classes8.bookimage1}><img src={props.book_Image} width='90%' height='90%' /></Box>
-            <Box className={classes8.bookimage2}><img src='./assets/mainprofile.png' width='100%' height='100%' /></Box>
+            <Box className={classes8.bookimage1}><img src={bookDetail.book_Image} width='90%' height='90%' /></Box>
+            <Box className={classes8.bookimage2}><img src={bookDetail.book_Image} width='100%' height='100%' /></Box>
           </Box>
           <Box sx={{ width: '0.2%' }}></Box>
           <Box className={classes8.container4}>
             <Box className={classes8.bookimgbtn}>
-              <Box className={classes8.bookimg1}><img src='./assets/mainprofile.png' width='85%' height='85%' /></Box>
+              <Box className={classes8.bookimg1}><img src={bookDetail.book_Image} width='85%' height='85%' /></Box>
               <Box className={classes8.bookbtn}>
                 <Box className={classes8.bookbtns}>
                   <Button variant="contained" className={classes8.addbag}>Add to Bag</Button>
@@ -326,40 +358,27 @@ function BookSummary(props) {
               <Box className={classes8.bookdetails1}>
                 <Box className={classes8.booktitle1}>
                   {/* Don't Make Me Think  */}
-                  {props.book_Name}</Box>
+                  {bookDetail.book_Name}</Box>
                 <Box sx={{ height: '1%' }}></Box>
-                <Box className={classes8.bookauthor1}>{props.author_Name}</Box>
+                <Box className={classes8.bookauthor1}>{bookDetail.author_Name}</Box>
                 <Box sx={{ height: '0.6%' }}></Box>
                 <Box className={classes8.bookpoints1}>
                   <Box className={classes8.bookratings1}>
-                    <Box sx={{ fontSize: '12px' }}>4.5</Box>
+                    <Box sx={{ fontSize: '12px' }}>{bookDetail.rating}</Box>
                     <StarIcon fontSize="10px" sx={{ color: 'white' }} />
                   </Box>
-                  <Box className={classes8.bookquantity1}>{props.book_Quantity}</Box>
+                  <Box className={classes8.bookquantity1}>({bookDetail.rating_Count})</Box>
                 </Box>
                 <Box className={classes8.bookprice1}>
-                  <Box className={classes8.bookdiscount1}>Rs.{props.discount_Price}</Box>
-                  <Box className={classes8.bookcost1}>Rs. {props.price}</Box>
+                  <Box className={classes8.bookdiscount1}>Rs.{bookDetail.discount_Price}</Box>
+                  <Box className={classes8.bookcost1}>Rs. {bookDetail.price}</Box>
                 </Box>
                 <Box sx={{ width: '80%', position: 'relative', top: '15px' }}><Divider sx={{ borderBottomWidth: 2, width: '100%' }} /></Box>
                 <Box className={classes8.bookparagraph}>
                   <Box className={classes8.para1}>
                     <span style={{ color: '#878787', display: 'flex', alignItems: 'center' }}> <Box style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#878787' }}></Box>&nbsp;Book Detail</span>
                     <Box className={classes8.paratext} sx={{ marginLeft: '9px', fontSize: '12px', opacity: '0.8' }}>
-                      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                      aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                      takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                      et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                      consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                      At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-                      sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-                      magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                      sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-                      sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-                      est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                      labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                      et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus estundefined
+                      {bookDetail.description}
                     </Box>
                   </Box>
                 </Box>
@@ -371,7 +390,7 @@ function BookSummary(props) {
                   <Box className={classes8.feedbackrate}>
                     <Box sx={{ fontSize: '14px', height: '18%' }}>Overall rating</Box>
                     <Box className={classes8.stars}>
-                      <Rating defaultValue={0} size="medium" style={{ color: 'black !important' }} readOnly />
+                      <Rating defaultValue={0} size="medium" style={{ color: 'black !important' }} name="half-rating" precision={0.5} />
                     </Box>
                     <Box className={classes8.inputbase}><InputBase sx={{ marginLeft: '8px' }} placeholder='write your review' />
                     </Box>

@@ -3,7 +3,8 @@ import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react'
 import Book from '../../Components/Book/Book'
 import Header from '../../Components/Header/Header'
-import { retriveBooksAPI } from '../../Services/dataservice'
+import WishList from '../../Components/WishList/WishList'
+import { getwishlistAPI, retriveBooksAPI, wishlistAPI } from '../../Services/dataservice'
 
 
 
@@ -53,6 +54,8 @@ function Dashboard() {
 
     const [dataArray, setDataArray] = useState([])
 
+    //const [wishListarray, setWishListArray] = useState([])
+
     useEffect(() => {
         retriveBooksAPI()
             .then((response) => {
@@ -63,29 +66,39 @@ function Dashboard() {
         console.log("All Books Retrived")
     }, [])
 
+    // useEffect(() => {
+    //     getwishlistAPI()
+    //         .then((response) => {
+    //             console.log(response)
+    //             setWishListArray(response.data.response)
+    //         })
+    //         .catch((error) => { console.log(error) })
+    //     console.log("WishList Retrived")
+    // }, [])
+
     return (
         <div>
             <Header />
             <Box className={classes6.options}>
-            <Box className={classes6.bookthing}>
-                <Box style={{ fontWeight: 600, fontSize: 20 }}>
-                    Books
+                <Box className={classes6.bookthing}>
+                    <Box style={{ fontWeight: 600, fontSize: 20 }}>
+                        Books
+                    </Box>
+                    <Box className={classes6.Itemthing} style={{ fontSize: 13, color: '#878787', }}>
+                        (123 Items)
+                    </Box>
                 </Box>
-                <Box className={classes6.Itemthing} style={{ fontSize: 13, color: '#878787', }}>
-                    (123 Items)
+                <Box>
+                    <select>
+                        <option value="sort by relevance">Sort By Relevance</option>
+                        <option value="Price: Low to High">Price: Low to High</option>
+                        <option value="Price: High to Low">Price: High to Low</option>
+                        <option value="What's New">What's New</option>
+                        <option value="Popularity">Popularity</option>
+                        <option value="Better Discount">Better Discount</option>
+                        <option value="Customer Rating">Customer Rating</option>
+                    </select>
                 </Box>
-            </Box>
-            <Box>
-                <select style={{}}>
-                    <option value="sort by relevance">Sort By Relevance</option>
-                    <option value="Price: Low to High">Price: Low to High</option>
-                    <option value="Price: High to Low">Price: High to Low</option>
-                    <option value="What's New">What's New</option>
-                    <option value="Popularity">Popularity</option>
-                    <option value="Better Discount">Better Discount</option>
-                    <option value="Customer Rating">Customer Rating</option>
-                </select>
-            </Box>
             </Box>
             <div>
                 <div className={classes6.listren}>

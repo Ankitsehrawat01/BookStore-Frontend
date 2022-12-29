@@ -10,6 +10,8 @@ import ResetPassword from './Pages/ResetPassword/ResetPassword';
 import Router1 from './Pages/Router/router';
 import Login from './Pages/Sign-in/Login';
 import SignUp from './Pages/Sign-up/SignUp';
+import Cart from './Components/Cart/Cart';
+import Address from './Components/Address/Address';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
      {/* <Book /> */}
      {/* <BookSummary /> */}
      {/* <WishList /> */}
+     {/* <Cart/> */}
+     {/* <Address /> */}
     </div>
   );
 }
