@@ -32,8 +32,8 @@ export const deletewishlistAPI =(wishListId) => {
 }
 
 //to add book to cart
-export const addCartAPI =() => {
-    let response = axios.post('https://localhost:44379/api/Cart/Add', headerConfig)
+export const addCartAPI =(cartobj) => {
+    let response = axios.post('https://localhost:44379/api/Cart/Add',cartobj, headerConfig)
     return response
 }
 //to get cart

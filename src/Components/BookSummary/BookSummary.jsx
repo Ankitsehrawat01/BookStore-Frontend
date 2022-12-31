@@ -306,10 +306,13 @@ function BookSummary() {
 
   const navigate = useNavigate()
 
+  //Add To Cart API
+  const cartobj = {"book_Quantity":0,"bookid":0}
 
   const cartlistener =() => {
-    console.log(localStorage.getItem('bookId'))
-    addCartAPI(localStorage.getItem('bookId'))
+    cartobj.book_Quantity=1
+    cartobj.bookid=Number(localStorage.getItem("bookId"))
+    addCartAPI(cartobj)
       .then((response) => {
         console.log(response)
         localStorage.setItem("cartId", response.data.data)
@@ -319,6 +322,7 @@ function BookSummary() {
     console.log(" add to cart successful")
   }
 
+  //Add to wishlist API
   const wishListlistener = () => {
     console.log(localStorage.getItem('bookId'))
     addWishlist(localStorage.getItem('bookId'))
@@ -330,6 +334,7 @@ function BookSummary() {
     console.log(" add to wishlist successful")
   }
 
+  //Get Book Summary
   useEffect(() => {
     retriveById(bookId)
       .then((response) => {
@@ -402,7 +407,7 @@ function BookSummary() {
                   <Box className={classes8.feedbackrate}>
                     <Box sx={{ fontSize: '14px', height: '18%' }}>Overall rating</Box>
                     <Box className={classes8.stars}>
-                      <Rating defaultValue={0} size="medium" style={{ color: 'black !important' }} name="half-rating" precision={0.5} />
+                      <Rating defaultValue={0} size="medium" style={{ color: 'black !important' }} name="half-rating" precision={1} />
                     </Box>
                     <Box className={classes8.inputbase}><InputBase sx={{ marginLeft: '8px' }} placeholder='write your review' />
                     </Box>
