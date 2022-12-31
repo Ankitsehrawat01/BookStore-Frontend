@@ -2,6 +2,7 @@
 import React from 'react'
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import BookSummary from '../../Components/BookSummary/BookSummary'
+import Cart from '../../Components/Cart/Cart'
 import WishList from '../../Components/WishList/WishList'
 import Dashboard from '../Dashboard/Dashboard'
 import ForgetPassword from '../ForgetPassword/ForgetPassword'
@@ -20,6 +21,7 @@ function Router1() {
                     <Route path ='/dashboard' element={<Dashboard />} />
                     <Route path='/booksummary' element={<BookSummary />} />
                     <Route path='/wishlist' element={<WishList />} />
+                    <Route path='/cart' element={<Cart />} />
                 </Routes>
             </Router>
         </div>

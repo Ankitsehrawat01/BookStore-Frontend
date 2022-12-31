@@ -12,6 +12,8 @@ import Login from './Pages/Sign-in/Login';
 import SignUp from './Pages/Sign-up/SignUp';
 import Cart from './Components/Cart/Cart';
 import Address from './Components/Address/Address';
+import OrderSummary from './Components/OrderSummary/OrderSummary';
+import OrderSummaryDetails from './Components/OrderSummary/OrderSummaryDetails';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
      {/* <WishList /> */}
      {/* <Cart/> */}
      {/* <Address /> */}
+     {/* <OrderSummary /> */}
+     {/* <OrderSummaryDetails /> */}
     </div>
   );
 }

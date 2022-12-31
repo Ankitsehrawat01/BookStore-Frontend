@@ -10,8 +10,9 @@ import Rating from '@mui/material/Rating';
 import InputBase from '@mui/material/InputBase';
 import Header from '../Header/Header';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { addWishlist, retriveById } from '../../Services/dataservice';
+import { addCartAPI, addToCart, addWishlist, getwishlistAPI, getwishlistAPIa, retriveById } from '../../Services/dataservice';
 import { useState } from 'react';
+import WishList from '../WishList/WishList';
 
 
 const useStyle = makeStyles({
@@ -303,29 +304,40 @@ function BookSummary() {
 
   const bookId = JSON.parse(localStorage.getItem("bookId"));
 
-  // const navigate = useNavigate ()
+  const navigate = useNavigate()
 
 
-  // const wishListlistener =()=> {
-  //   console.log(props.book.bookId)
-  //   addWishlist (props.book.bookId)
-  //           .then((response) => {
-  //               console.log(response)
-  //               localStorage.setItem("bookId", response.data.data)
-  //               navigate('/wishlist')
-  //           })
-  //           .catch((error) => { console.log(error) })
-  //       console.log(" add to wishlist successful")
-  // }
+  const cartlistener =() => {
+    console.log(localStorage.getItem('bookId'))
+    addCartAPI(localStorage.getItem('bookId'))
+      .then((response) => {
+        console.log(response)
+        localStorage.setItem("cartId", response.data.data)
+        navigate('/cart')
+      })
+      .catch((error) => { console.log(error) })
+    console.log(" add to cart successful")
+  }
 
-useEffect(() => {
-    retriveById (bookId)
-    .then((response) => {
-      console.log(response)
-      setBookDetail(response.data.response)
-    }).catch((error) => {
-      console.log(error)
-    })
+  const wishListlistener = () => {
+    console.log(localStorage.getItem('bookId'))
+    addWishlist(localStorage.getItem('bookId'))
+      .then((response) => {
+        console.log(response)
+        navigate('/wishlist')
+      })
+      .catch((error) => { console.log(error) })
+    console.log(" add to wishlist successful")
+  }
+
+  useEffect(() => {
+    retriveById(bookId)
+      .then((response) => {
+        console.log(response)
+        setBookDetail(response.data.response)
+      }).catch((error) => {
+        console.log(error)
+      })
   }, [])
 
   return (
@@ -349,8 +361,8 @@ useEffect(() => {
               <Box className={classes8.bookimg1}><img src={bookDetail.book_Image} width='85%' height='85%' /></Box>
               <Box className={classes8.bookbtn}>
                 <Box className={classes8.bookbtns}>
-                  <Button variant="contained" className={classes8.addbag}>Add to Bag</Button>
-                  <Button variant="contained" className={classes8.addfav} startIcon={<FavoriteIcon />}>Wishlist</Button>
+                  <Button variant="contained" className={classes8.addbag} onClick={cartlistener}>Add to Bag</Button>
+                  <Button variant="contained" className={classes8.addfav} onClick={wishListlistener} startIcon={<FavoriteIcon />}>Wishlist</Button>
                 </Box>
               </Box>
             </Box>

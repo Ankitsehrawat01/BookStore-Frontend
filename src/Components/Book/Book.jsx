@@ -128,19 +128,6 @@ function Book(props) {
         navigate('/booksummary')
     }
 
-
-    // const opnBookDetails = () => {
-    //     console.log(props.book.bookId)
-    //     retriveById(props.book.bookId)
-    //         .then((response) => {
-    //             console.log(response)
-    //             localStorage.setItem("bookId", response.data.response)
-    //             navigate('/booksummary')
-    //         })
-    //         .catch((error) => { console.log(error) })
-    //     console.log(" Get book by Id successful")
-    // }
-
     return (
         <div>
             <Paper onClick={opnBookDetails} elevation={1} className={classes7.main2}>

@@ -54,8 +54,6 @@ function Dashboard() {
 
     const [dataArray, setDataArray] = useState([])
 
-    //const [wishListarray, setWishListArray] = useState([])
-
     useEffect(() => {
         retriveBooksAPI()
             .then((response) => {
@@ -65,16 +63,6 @@ function Dashboard() {
             .catch((error) => { console.log(error) })
         console.log("All Books Retrived")
     }, [])
-
-    // useEffect(() => {
-    //     getwishlistAPI()
-    //         .then((response) => {
-    //             console.log(response)
-    //             setWishListArray(response.data.response)
-    //         })
-    //         .catch((error) => { console.log(error) })
-    //     console.log("WishList Retrived")
-    // }, [])
 
     return (
         <div>
