@@ -8,6 +8,7 @@ import AddressDetails from '../Address/AddressDetails';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import OrderSummaryDetails from '../OrderSummary/OrderSummaryDetails';
 import { getCartAPI } from '../../Services/dataservice';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyle = makeStyles({
@@ -44,7 +45,7 @@ const useStyle = makeStyles({
         position: 'relative',
         border: '0px solid red',
         width: '55vw',
-        height: '40vh',
+        height: 'auto',
         left: '230px',
         top: '20px'
     },
@@ -72,7 +73,6 @@ const useStyle = makeStyles({
         left: '120px',
         width: '40%',
         height: '58%',
-        position: 'relative',
         bottom: '60px',
     },
     bookpricebox2: {
@@ -143,12 +143,18 @@ function Cart() {
             }).catch((error) => { console.log(error) })
     }, [])
 
+    const navigate = useNavigate ()
+
+    const openBook = () => {
+        navigate('/dashboard')
+    }
+
     return (
         <div>
             <Box>
                 <Header />
                 <Box className={class2.hometextthing}>
-                    <Box className={class2.hometext}>Home</Box>
+                    <Box className={class2.hometext} onClick={openBook}>Home</Box>
                     <Box className={class2.carttext} style={{ fontWeight: 600 }}> / My Cart</Box >
                 </Box>
                 <Paper className={class2.paperthing1} elevation={5}>

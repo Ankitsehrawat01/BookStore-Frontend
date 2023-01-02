@@ -1,11 +1,9 @@
-import { FormatAlignJustify } from '@mui/icons-material'
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Paper } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { width } from '@mui/system'
-import { deletewishlistAPI, getwishlistAPI, retriveById } from '../../Services/dataservice'
+import { deletewishlistAPI, getwishlistAPI} from '../../Services/dataservice'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -50,7 +48,7 @@ const useStyle = makeStyles({
         display: 'flex',
         flexDirection: 'row',
         position: 'relative',
-        border: '0px solid red',
+        //border: '0px solid red',
         width: '67vw',
         backgroundColor: '#E4E4E4 !important',
         border: '#E4E4E4',
@@ -76,7 +74,6 @@ const useStyle = makeStyles({
         left: '120px',
         width: '40%',
         height: '58%',
-        position: 'relative',
         bottom: '60px',
         rowGap: '10px'
     },
@@ -102,7 +99,6 @@ function WishList() {
         console.log('WISHLIST ID', wishListId)
         deletewishlistAPI(wishListId)
             .then((response) => {
-                console.log(response.data.data)
                 navigate('/wishlist')
             })
             .catch((error) => { console.log(error) })

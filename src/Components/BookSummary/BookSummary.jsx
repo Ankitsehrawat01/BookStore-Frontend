@@ -10,7 +10,7 @@ import Rating from '@mui/material/Rating';
 import InputBase from '@mui/material/InputBase';
 import Header from '../Header/Header';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { addCartAPI, addToCart, addWishlist, getwishlistAPI, getwishlistAPIa, retriveById } from '../../Services/dataservice';
+import { addCartAPI, addFeedbackAPI, addToCart, addWishlist, getFeedbackAPI, getwishlistAPI, getwishlistAPIa, retriveById } from '../../Services/dataservice';
 import { useState } from 'react';
 import WishList from '../WishList/WishList';
 
@@ -302,16 +302,24 @@ function BookSummary() {
 
   const [bookDetail, setBookDetail] = useState([])
 
+  const [feedbackDetails, setFeedbackDetails] = useState([])
+
+  const [feedbackObj, setFeedbackObj] = useState({
+    //userId: 2,
+    bookId: Number(localStorage.getItem("bookId")),
+    comment: "",
+    rating: 0
+  })
+
   const bookId = JSON.parse(localStorage.getItem("bookId"));
 
   const navigate = useNavigate()
 
   //Add To Cart API
-  const cartobj = {"book_Quantity":0,"bookid":0}
-
-  const cartlistener =() => {
-    cartobj.book_Quantity=1
-    cartobj.bookid=Number(localStorage.getItem("bookId"))
+  const cartobj = { "book_Quantity": 0, "bookid": 0 }
+  const cartlistener = () => {
+    cartobj.book_Quantity = 1
+    cartobj.bookid = Number(localStorage.getItem("bookId"))
     addCartAPI(cartobj)
       .then((response) => {
         console.log(response)
@@ -340,6 +348,35 @@ function BookSummary() {
       .then((response) => {
         console.log(response)
         setBookDetail(response.data.response)
+      }).catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
+  //Add FeedBack
+  const enterComment = (event) => {
+    setFeedbackObj((prevState) => ({ ...prevState, comment: event.target.value }));
+  };
+
+  const enterRating = (event) => {
+    setFeedbackObj((prevState) => ({ ...prevState, rating: JSON.parse(event.target.value) }));
+  };
+
+  const feedbackListener = () => {
+    addFeedbackAPI(feedbackObj)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => { console.log(error) })
+    console.log(" add feedback successful")
+  }
+
+  //Get all feedback
+  useEffect(() => {
+    getFeedbackAPI(bookId)
+      .then((response) => {
+        console.log(response)
+        setFeedbackDetails(response.data.data)
       }).catch((error) => {
         console.log(error)
       })
@@ -407,27 +444,32 @@ function BookSummary() {
                   <Box className={classes8.feedbackrate}>
                     <Box sx={{ fontSize: '14px', height: '18%' }}>Overall rating</Box>
                     <Box className={classes8.stars}>
-                      <Rating defaultValue={0} size="medium" style={{ color: 'black !important' }} name="half-rating" precision={1} />
+                      <Rating defaultValue={0} size="medium" style={{ color: 'black !important' }} name="half-rating" precision={1} onChange={enterRating} />
                     </Box>
-                    <Box className={classes8.inputbase}><InputBase sx={{ marginLeft: '8px' }} placeholder='write your review' />
+                    <Box className={classes8.inputbase}><InputBase sx={{ marginLeft: '8px' }} placeholder='write your review' onChange={enterComment} />
                     </Box>
-                    <Box className={classes8.feedbackbutton}><Button variant="contained" sx={{ width: '13%', height: '80%', textTransform: 'capitalize' }}>Submit</Button></Box>
+                    <Box className={classes8.feedbackbutton}><Button variant="contained" sx={{ width: '13%', height: '80%', textTransform: 'capitalize' }} onClick={feedbackListener}>Submit</Button></Box>
                   </Box>
                 </Box>
-                <Box className={classes8.firstfeedback}>
-                  <Box sx={{ display: 'flex' }}>
-                    <Box className={classes8.ac}>AC</Box>
-                    <Box sx={{ marginLeft: '8px', fontSize: '15px', fontWeight: '500' }}>Aniket Chile</Box>
-                  </Box>
-                  <Box sx={{ height: '28%', }}>
-                    <Rating className={classes8.stars1} defaultValue={3} size="medium" style={{ color: 'black !important', marginLeft: '35px' }} readOnly />
-                  </Box>
-                  <Box sx={{ height: '50%', marginLeft: '35px', fontSize: '12px', textAlign: 'justify', color: '#707070' }}>
-                    <span >Good product. Even though the translation could have been better, Chanakya's neeti are thought provoking.
-                      Chanakya has written on many different topics and his writings are succinct.</span>
-                  </Box>
-                </Box>
-                <Box className={classes8.secondfeedback}>
+                {
+                  feedbackDetails.map((feedback) => (
+
+                    <Box className={classes8.firstfeedback}>
+                      <Box sx={{ display: 'flex' }}>
+                        <Box className={classes8.ac}>AC</Box>
+                        <Box sx={{ marginLeft: '8px', fontSize: '15px', fontWeight: '500' }}>{feedback.fullName}</Box>
+                      </Box>
+                      <Box sx={{ height: '28%', }}>
+                        <Rating className={classes8.stars1} defaultValue={feedback.rating} size="medium" style={{ color: 'black !important', marginLeft: '35px' }} readOnly />
+                      </Box>
+                      <Box sx={{ height: '50%', marginLeft: '35px', fontSize: '12px', textAlign: 'justify', color: '#707070' }}>
+                        <span >{feedback.comment}</span>
+                      </Box>
+                    </Box>
+
+                  ))
+                }
+                {/* <Box className={classes8.secondfeedback}>
                   <Box sx={{ display: 'flex' }}>
                     <Box className={classes8.sb}>SB</Box>
                     <Box sx={{ marginLeft: '8px', fontSize: '14px', fontWeight: '500' }}>Shweta Bodkar</Box>
@@ -439,7 +481,7 @@ function BookSummary() {
                     <span>Good product. Even though the translation could have been better, Chanakya's neeti are thought provoking.
                       Chanakya has written on many different topics and his writings are succinct.</span>
                   </Box>
-                </Box>
+                </Box> */}
               </Box>
             </Box>
           </Box>

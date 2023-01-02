@@ -41,3 +41,13 @@ export const getCartAPI =() => {
     let response = axios.get('https://localhost:44379/api/Cart/GetCart', headerConfig)
     return response
 }
+//to add feedback
+export const addFeedbackAPI =(feedbackObj) => {
+    let response = axios.post('https://localhost:44379/api/Feedback/Add',feedbackObj, headerConfig)
+    return response
+}
+//to get feedback
+export const getFeedbackAPI =(bookId) => {
+    let response = axios.get(`https://localhost:44379/api/Feedback/Get?BookId=${bookId}`, headerConfig)
+    return response
+}
